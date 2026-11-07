@@ -12,7 +12,7 @@ private:
     double radio;
 public:
     entidadFisica();
-    entidadFisica(const vector2D& pos, const vector2D& vel, double masa_, double radio_);
+    entidadFisica(const vector2D& vel,const vector2D& pos, double masa_, double radio_);
     virtual ~entidadFisica();
     //actualizacion a medida del tiempo
     virtual void actualizar(double dt) = 0;
