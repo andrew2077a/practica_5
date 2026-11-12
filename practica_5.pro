@@ -15,6 +15,7 @@ SOURCES += \
     mainwindow.cpp \
     obstaculo.cpp \
     particula.cpp \
+    simulador.cpp \
     vector2D.cpp
 
 HEADERS += \
@@ -24,6 +25,7 @@ HEADERS += \
     mainwindow.h \
     obstaculo.h \
     particula.h \
+    simulador.h \
     vector2D.h
 
 FORMS += \
@@ -33,3 +35,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    simu.txt

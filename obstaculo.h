@@ -29,8 +29,7 @@ public:
     double getAbajo() const;
     vector2D getCentro() const;
     //lo hevy :(
-    ladoImpacto colisionar(entidadFisica& e,
-                           double coefRestitucion = datos::COEF_RESTITUCION) const;
+    ladoImpacto colisionar(entidadFisica& e,double coefRestitucion = datos::COEF_RESTITUCION) const;
 };
 
 #endif // OBSTACULO_H

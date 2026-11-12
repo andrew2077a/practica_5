@@ -1,11 +1,12 @@
 #include "mainwindow.h"
-
+#include "simulador.h"
 #include <QApplication>
+
+#include "simulador.h"
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
-    return a.exec();
+    Simulador simu;
+    simu.simulando();
+    return 0;
 }
