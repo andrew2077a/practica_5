@@ -12,40 +12,38 @@ entidadFisica::entidadFisica(const vector2D& vel_,const vector2D& pos,
 entidadFisica::~entidadFisica(){}
 
 //aceso
-const vector2D& entidadFisica::getPosicion() const
-{ return posicion; }
+const vector2D& entidadFisica::getPosicion() const{
+    return posicion; }
 
-const vector2D& entidadFisica::getVelocidad() const
-{ return velocidad; }
+const vector2D& entidadFisica::getVelocidad() const{
+    return velocidad; }
 
-double entidadFisica::getMasa() const
-{ return masa; }
+double entidadFisica::getMasa() const{
+    return masa; }
 
-double entidadFisica::getRadio() const
-{ return radio; }
+double entidadFisica::getRadio() const{
+    return radio; }
 
-void entidadFisica::setPosicion(const vector2D& p)
-{ posicion = p; }
+void entidadFisica::setPosicion(const vector2D& p){
+    posicion = p; }
 
-void entidadFisica::setVelocidad(const vector2D& v)
-{ velocidad = v; }
+void entidadFisica::setVelocidad(const vector2D& v){
+    velocidad = v; }
 
-void entidadFisica::setMasa(double m)
-{
+void entidadFisica::setMasa(double m){
     if (m <= 0.0)
         throw invalid_argument("La masa debe ser mayor que cero");
     masa = m;
 }
 
-void entidadFisica::setRadio(double r)
-{
+void entidadFisica::setRadio(double r){
     if (r <= 0.0)
         throw invalid_argument("El radio debe ser mayor que cero");
     radio = r;
 }
 //magnitudes
-vector2D entidadFisica::momento() const
-{return velocidad * masa;}
+vector2D entidadFisica::momento() const{
+    return velocidad * masa;}
 
-double entidadFisica::energiaCinetica() const
-{return 0.5 * masa * velocidad.magnitudP2();}
+double entidadFisica::energiaCinetica() const{
+    return 0.5 * masa * velocidad.magnitudP2();}

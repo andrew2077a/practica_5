@@ -7,12 +7,12 @@ class particula : public entidadFisica
 private:
     bool usaGravedad;
 public:
-    particula(const vector2D& pos, const vector2D& vel, double masa_, double radio_,
-              bool usaGravedad_ = true);
+    particula(const vector2D& pos, const vector2D& vel, double masa_, double radio_,bool usaGravedad_ = true);
     //movimiento
     void actualizar(double dt)override;
     //acceso
     bool getUsaGravedad() const;
     void setUsaGravedad(bool g);
+    bool colisionParticula(particula &par);
 };
 #endif // PARTICULA_H
