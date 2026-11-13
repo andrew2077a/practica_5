@@ -9,11 +9,22 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    caja.cpp \
+    entidadFisica.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    obstaculo.cpp \
+    particula.cpp \
+    vector2D.cpp
 
 HEADERS += \
-    mainwindow.h
+    caja.h \
+    datos.h \
+    entidadFisica.h \
+    mainwindow.h \
+    obstaculo.h \
+    particula.h \
+    vector2D.h
 
 FORMS += \
     mainwindow.ui
