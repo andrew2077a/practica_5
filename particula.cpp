@@ -3,7 +3,7 @@
 
 particula::particula(const vector2D& pos, const vector2D& vel, double masa_, double radio_,
                      bool usaGravedad_)
-    : entidadFisica(pos, vel, masa_, radio_), usaGravedad(usaGravedad_) {}
+        : entidadFisica(vel, pos, masa_, radio_), usaGravedad(usaGravedad_) {}
 
 // x = x0 + v*dt + 1/2*a*dt^2
 void particula::actualizar(double dt) {

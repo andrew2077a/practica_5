@@ -3,14 +3,21 @@
 #include <algorithm>
 #include <cmath>
 using namespace std;
-obstaculo::obstaculo(const vector2D& esquina_, double ancho_,
-                     double alto_):esquina(esquina_), alto(alto_), ancho(ancho_)
+obstaculo::obstaculo(const vector2D& esquina_, double ancho_, double alto_,
+                     double vida_, int duenio_)
+    : esquina(esquina_), alto(alto_), ancho(ancho_),
+    vida(vida_), vidaMax(vida_), duenio(duenio_)
 {
     if (ancho_ <= 0.0 || alto_ <= 0.0)
         throw invalid_argument("El ancho y el alto del obstaculo deben ser mayores que cero");
+    if (vida_ <= 0.0)
+        throw invalid_argument("La vida del obstaculo debe ser mayor que cero");
+    if (duenio_ != 0 && duenio_ != 1)
+        throw invalid_argument("El dueno debe ser 0 o 1");
 }
-obstaculo::obstaculo(const vector2D& esquina_, double lado)
-    :obstaculo(esquina_, lado, lado){}
+obstaculo::obstaculo(const vector2D& esquina_, double lado, double vida_, int dueno_)
+    : obstaculo(esquina_, lado, lado, vida_, dueno_) {}
+
 //acceso
 const vector2D& obstaculo::getEsquina() const
 { return esquina; }
@@ -29,6 +36,23 @@ double obstaculo::getAbajo() const
 { return esquina.getY() + alto; }
 vector2D obstaculo::getCentro() const
 {return vector2D(esquina.getX() + ancho / 2.0, esquina.getY() + alto / 2.0);}
+double obstaculo::getVida() const
+{ return vida; }
+double obstaculo::getVidaMax() const
+{ return vidaMax; }
+double obstaculo::fraccionVida() const
+{ return vida / vidaMax; }
+int    obstaculo::getDuenio() const
+{ return duenio; }
+bool   obstaculo::estaDestruido() const
+{ return vida <= 0.0; }
+
+void obstaculo::recibirDano(double dano)
+{
+    if (dano < 0.0)
+        throw invalid_argument("El dano no puede ser negativo");
+    vida = max(0.0, vida - dano);
+}
 
 ladoImpacto obstaculo::colisionar(entidadFisica& e,double coefRestitucion) const
 {
@@ -99,6 +123,8 @@ ladoImpacto obstaculo::colisionar(entidadFisica& e,double coefRestitucion) const
     if (-vn < datos::UMBRAL_REPOSO) {
         e.setPosicion(p);
         e.setVelocidad(vPar);
+        if (vPar.magnitud() < datos::UMBRAL_REPOSO)
+            return ladoImpacto::reposo;   // apoyada y casi quieta: desaparece
         return ladoImpacto::ninguno;
     }
 
@@ -106,6 +132,18 @@ ladoImpacto obstaculo::colisionar(entidadFisica& e,double coefRestitucion) const
     e.setPosicion(p);
     e.setVelocidad(vPar - vPerp * coefRestitucion);
     return lado;
+}
+
+bool obstaculo::intersecta(const entidadFisica& e) const
+{
+    const vector2D& p = e.getPosicion();
+    double r = e.getRadio();
+    // punto del rectangulo mas cercano al centro del circulo
+    double qx = max(getIzquierda(), min(p.getX(), getDerecha()));
+    double qy = max(getArriba(),    min(p.getY(), getAbajo()));
+    double dx = p.getX() - qx;
+    double dy = p.getY() - qy;
+    return dx * dx + dy * dy <= r * r;
 }
 
 
