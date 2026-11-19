@@ -11,5 +11,9 @@ void proyectil::actualizar(double dt)
     tiempoVida -= dt;
 }
 
-int proyectil::getDuenio() const  { return duenio; }
-bool proyectil::haExpirado() const { return tiempoVida <= 0.0; }
+int proyectil::getDuenio() const  {
+    return duenio;
+}
+bool proyectil::haExpirado() const {
+    return tiempoVida <= 0.0;
+}

@@ -5,9 +5,8 @@
 #include "obstaculo.h"
 #include "comandante.h"
 #include "proyectil.h"
-
-class jugador
-{
+using namespace std;
+class jugador{
 private:
     int numero;                              // 0 (izquierda) o 1 (derecha)
     vector2D posCanon;
@@ -24,7 +23,7 @@ public:
     void setVelocidad(double v);
 
     void agregarObstaculo(obstaculo* o);
-    const std::vector<obstaculo*>& getObstaculos() const;
+    const vector<obstaculo*>& getObstaculos() const;
     void setComandante(comandante* c);
     comandante* getComandante() const;
 

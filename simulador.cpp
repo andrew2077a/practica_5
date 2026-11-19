@@ -55,7 +55,9 @@ void Simulador::construirNivel()
 
 bool Simulador::disparar()
 {
-    if (estado != estadoJuego::esperando) return false;
+    if (estado != estadoJuego::esperando){
+        return false;
+    }
     actual = jugadores[turno]->crearProyectil();
     estado = estadoJuego::enVuelo;
     return true;

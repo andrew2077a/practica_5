@@ -6,17 +6,14 @@
 #include <QGraphicsPixmapItem>
 #include <QGraphicsTextItem>
 #include <QTimer>
-#include <QSpinBox>
+#include <QSlider>
 #include <QPushButton>
 #include <QLabel>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QMessageBox>
 
-// =====================================================================
-//  >>>  ESCRIBE AQUI LA RUTA DE TUS IMAGENES  <<<
-//  Ejemplo: "C:/Users/tu_usuario/imagenes/muneco.png"
-//  Si la dejas vacia se dibuja un rectangulo / circulo de color.
+
 // =====================================================================
 static const QString RUTA_COMANDANTE = ":/sprites/images-removebg-preview.png";
 static const QString RUTA_PROYECTIL  = ":/sprites/Red_energy_ball_sprite_2K_20261024221749-removebg-preview.png";
@@ -30,7 +27,7 @@ graficos::graficos(QWidget *parent)
     timer = new QTimer(this);
     finMostrado = false;
 
-    pixComandante = QPixmap(RUTA_COMANDANTE).scaled(40, 80);
+    pixComandante = QPixmap(RUTA_COMANDANTE).scaled(60, 80);
     pixProyectil  = QPixmap(RUTA_PROYECTIL).scaled(16, 16);
 
     escena->setSceneRect(0, 0, datos::ANCHO_ESCENA, datos::ALTO_ESCENA);
@@ -40,12 +37,24 @@ graficos::graficos(QWidget *parent)
     vista->setFixedSize(int(datos::ANCHO_ESCENA) + 4, int(datos::ALTO_ESCENA) + 4);
 
     etiquetaTurno = new QLabel();
-    spinAngulo = new QSpinBox();
+    spinAngulo = new QSlider(Qt::Horizontal);
     spinAngulo->setRange(0, 90);
     spinAngulo->setValue(45);
-    spinVelocidad = new QSpinBox();
+    spinAngulo->setMinimumWidth(120);
+
+    spinVelocidad = new QSlider(Qt::Horizontal);
     spinVelocidad->setRange(0, int(datos::VEL_MAX_DISPARO));
     spinVelocidad->setValue(400);
+    spinVelocidad->setMinimumWidth(120);
+
+    // numeritos que muestran el valor mientras mueves la barra
+    QLabel* valAngulo = new QLabel("45");
+    QLabel* valVelocidad = new QLabel("400");
+    connect(spinAngulo, &QSlider::valueChanged, this,
+            [=](int v){ valAngulo->setText(QString::number(v)); });
+    connect(spinVelocidad, &QSlider::valueChanged, this,
+            [=](int v){ valVelocidad->setText(QString::number(v)); });
+
     botonDisparar = new QPushButton("Disparar");
 
     QHBoxLayout* controles = new QHBoxLayout();
@@ -53,8 +62,10 @@ graficos::graficos(QWidget *parent)
     controles->addStretch();
     controles->addWidget(new QLabel("Angulo:"));
     controles->addWidget(spinAngulo);
+    controles->addWidget(valAngulo);
     controles->addWidget(new QLabel("Velocidad:"));
     controles->addWidget(spinVelocidad);
+    controles->addWidget(valVelocidad);
     controles->addWidget(botonDisparar);
 
     QWidget* central = new QWidget(this);
@@ -143,7 +154,7 @@ void graficos::tick()
     if (juego->getEstado() == estadoJuego::fin && !finMostrado) {
         finMostrado = true;
         timer->stop();
-        QMessageBox::information(this, "Fin del juego",
-                                 QString("Gano el jugador %1").arg(juego->getGanador() + 1));
+        QMessageBox::information(this, "Fin del juego",QString("Gano el jugador %1").arg(juego->getGanador() + 1));
+        close();
     }
 }

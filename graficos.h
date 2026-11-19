@@ -7,7 +7,7 @@
 
 class QGraphicsScene;
 class QTimer;
-class QSpinBox;
+class QSlider;
 class QPushButton;
 class QLabel;
 
@@ -27,8 +27,8 @@ private:
     Simulador* juego;
     QGraphicsScene* escena;
     QTimer* timer;
-    QSpinBox* spinAngulo;
-    QSpinBox* spinVelocidad;
+    QSlider* spinAngulo;
+    QSlider* spinVelocidad;
     QPushButton* botonDisparar;
     QLabel* etiquetaTurno;
     QPixmap pixComandante;
