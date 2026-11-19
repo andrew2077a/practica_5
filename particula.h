@@ -2,8 +2,7 @@
 #define PARTICULA_H
 #include "entidadFisica.h"
 
-class particula : public entidadFisica
-{
+class particula : public entidadFisica{
 private:
     bool usaGravedad;
 public:

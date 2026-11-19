@@ -9,9 +9,11 @@ caja::caja(double ancho_, double alto_) : ancho(ancho_), alto(alto_)
 }
 
 double caja::getAncho() const{
-    return ancho; }
+    return ancho;
+}
 double caja::getAlto() const{
-    return alto; }
+    return alto;
+}
 
 bool caja::rebotar(entidadFisica& e) const {
     //copiamos los datos de la entidad
