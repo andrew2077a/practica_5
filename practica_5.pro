@@ -10,31 +10,38 @@ CONFIG += c++17
 
 SOURCES += \
     caja.cpp \
+    comandante.cpp \
     entidadFisica.cpp \
+    graficos.cpp \
+    jugador.cpp \
     main.cpp \
-    mainwindow.cpp \
     obstaculo.cpp \
     particula.cpp \
+    proyectil.cpp \
     simulador.cpp \
     vector2D.cpp
 
 HEADERS += \
     caja.h \
+    comandante.h \
     datos.h \
     entidadFisica.h \
-    mainwindow.h \
+    graficos.h \
+    jugador.h \
     obstaculo.h \
     particula.h \
+    proyectil.h \
     simulador.h \
     vector2D.h
 
-FORMS += \
-    mainwindow.ui
+FORMS +=
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-DISTFILES += \
-    simu.txt
+DISTFILES +=
+
+RESOURCES += \
+    recursos.qrc
